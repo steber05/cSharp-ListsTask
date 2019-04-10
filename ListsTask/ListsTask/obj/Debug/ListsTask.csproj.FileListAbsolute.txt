@@ -1,0 +1,7 @@
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\bin\Debug\ListsTask.exe.config
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\bin\Debug\ListsTask.exe
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\bin\Debug\ListsTask.pdb
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\obj\Debug\ListsTask.csprojAssemblyReference.cache
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\obj\Debug\ListsTask.csproj.CoreCompileInputs.cache
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\obj\Debug\ListsTask.exe
+D:\code\local\cSharp\source\repos\ListsTask\ListsTask\obj\Debug\ListsTask.pdb

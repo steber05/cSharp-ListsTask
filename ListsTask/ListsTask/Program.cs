@@ -164,15 +164,34 @@ namespace ListsTask
             }
         }//end of DisplayListReverse
 
-        public void DisplayValues()
+        public int[] GatherValues()//converts the list to an array for calculating the common values
         {
+            //array to keep track of integers
+            int[] a = new int[size];
+
+            Node temp = head;
+            for(int i=0;i<size-1;i++)
+            {
+                a[i] = temp.value;
+                temp = temp.next;
+            }
+            return a;
+        }//end of DisplayValues
+
+        public bool FindValue(int num)//used to find all the common values between multiple lists
+        {
+            bool b = false;
             Node temp = head;
             while (temp != null)
             {
-                Console.Write("{0} ", temp.value);
+                if (temp.value == num)
+                {
+                    b = true;
+                }
                 temp = temp.next;
             }
-        }//end of DisplayValues
+            return b;
+        }//end of FindValue
     }//end of DoublyLinkedList class
     class Program
     {
@@ -204,12 +223,27 @@ namespace ListsTask
             Console.WriteLine("\t\t[List 3]");
             DisplayListInfo(listThree);
 
-            //display all list values
-            Console.WriteLine("\t\tValues of all lists");
-            listOne.DisplayValues();
-            listTwo.DisplayValues();
-            listThree.DisplayValues();
-            Console.WriteLine("\n\n\nPress enter to exit...");
+            //display all list values that are the same
+            int[] aOne = listOne.GatherValues();
+            int[] aTwo = listTwo.GatherValues();
+            int[] aThree = listThree.GatherValues();
+
+            Console.WriteLine("All common integers in the lists");
+            switch (CalculateLength(aOne,aTwo,aThree))//
+            {
+                case 1:
+                    DisplayValues(aOne, listTwo, listThree);
+                    break;
+                case 2:
+                    DisplayValues(aTwo, listOne, listThree);
+                    break;
+                case 3:
+                    DisplayValues(aThree, listOne, listTwo);
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("Press enter to exit...");
             Console.ReadLine();
             return;
         }//end of Main
@@ -253,5 +287,38 @@ namespace ListsTask
             list.DisplayListReverse();
             Console.WriteLine();
         }//end of DisplayListInfo
+
+        public static int CalculateLength(int[] a, int[] a2, int[] a3)//calculate which array has the most elements this allows me to display the common integers in one sweep
+        {
+            int leastElements = 0;
+            if(a.Length > a2.Length && a.Length > a3.Length)
+            {
+                leastElements = 1;
+            }
+            else if(a2.Length > a.Length && a2.Length > a3.Length)
+            {
+                leastElements = 2;
+            }
+            else
+            {
+                leastElements = 3;
+            }
+            return leastElements;
+        }//end of CalculateLength
+
+        public static void DisplayValues(int[] a, DoublyLinkedList list, DoublyLinkedList list2)//display same values in all three lists using the biggest list as reference
+        {
+            for(int i=0;i<a.Length;i++)
+            {
+                if(list.FindValue(a[i]) && list2.FindValue(a[i]))
+                {
+                    Console.Write("{0},",a[i]);
+                }
+            }
+            Console.WriteLine("\n");
+        }//end of DisplayValues
     }//end of default Program class
 }//end of namespace
+
+//for the last task to display all common integers between the lists I went with a more bruteforce approach I feel it could have been optimized even without the use of arrays 
+//but i was having troubles with weird errors i couldn't debug so decided to stick with this approach.
